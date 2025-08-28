@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <title>How It Works - ASCII Live Camera Preview</title>
+    <link rel="stylesheet" type="text/css" href="Styles/howItWorkStyle.css">
+    
+</head>
+<body>
+    <header>
+        <h1>How It Works</h1>
+        <nav>
+            <a href="./">Home</a>
+            <a href="./about">About</a>
+            <a href="./howItWork">How It Works</a>
+            <a href="./gallery">Gallery</a>
+            <a href="./contact">Contact</a>
+        </nav>
+        <hr>
+    </header>
+    <main>
+        <section id="how-it-works">
+            <h2>Understanding ASCII Art</h2>
+            <p>ASCII art is a graphic design technique that uses characters from the ASCII standard to create images and designs. Each character represents a different shade of gray or color, allowing complex images to be formed using simple text.</p>
+
+            <h2>The Process</h2>
+            <p>Our ASCII Live Camera Preview converts a live video feed from your camera into ASCII art in real-time. Here’s a breakdown of how it works:</p>
+            <ol>
+                <li><strong>Capturing the Video:</strong> When you allow access to your camera, the browser captures the live video feed.</li>
+                <li><strong>Processing the Video:</strong> The captured video is then processed frame by frame. Each frame is divided into a grid of tiny blocks. The average color of each block is calculated to determine its brightness.</li>
+                <li><strong>Converting to ASCII:</strong> Each brightness level corresponds to a specific character in the ASCII character set. For instance, darker areas might be represented by dense characters like <code>@</code> or <code>#</code>, while lighter areas might be represented by spaces or dots. These characters are then arranged in the same grid pattern to form an ASCII representation of the video frame.</li>
+                <li><strong>Displaying the ASCII Art:</strong> The generated ASCII art is displayed on the webpage, refreshing multiple times per second to create the illusion of a live video feed.</li>
+            </ol>
+
+            <h2>Technical Details</h2>
+            <p><strong>JavaScript & p5.js:</strong> We use JavaScript along with the p5.js library to handle video capture and processing. p5.js simplifies working with multimedia and provides functions to easily manipulate pixels and render text.</p>
+            <p><strong>Real-time Conversion:</strong> The conversion from video to ASCII happens in real-time, ensuring you see a live preview with minimal delay.</p>
+
+            <h2>Allowing Camera Access</h2>
+            <p>For the ASCII live preview to work, you need to grant the browser permission to access your camera. Here’s how to do it:</p>
+            <ol>
+                <li><strong>Prompt for Permission:</strong> When you first visit the page, you’ll see a prompt asking for permission to use your camera. Click “Allow” to grant access.</li>
+                <li><strong>Browser Settings:</strong> If you accidentally denied access, you can change the permission in your browser settings. Look for camera permissions under the privacy or security settings, and allow access for this website.</li>
+            </ol>
+
+            <p>By allowing camera access, you enable the webpage to capture your live video feed and transform it into captivating ASCII art. Enjoy watching yourself in a new, artistic form!</p>
+        </section>
+        <hr>
+
+        <footer class="footer">
+            <div class="footer_container">
+                <div class="footer_row">
+                    <div class="footer_col">
+                        <img src="Images/synthArtLogo.jpg" alt="synthArtLogo" class="footer_image1">
+                    </div>
+                    <div class="footer_col">
+                        <img src="Images/SLIITlogo.png" alt="SLIITlogo" class="footer_image2">
+                    </div>
+                    <div class="footer_col">
+                        <h4><strong>Navigations</strong></h4>
+    
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./about">About</a></li>
+                            <li><a href="./gallery">Gallery</a></li>
+                            <li><a href="./contact">Contact</a></li>
+                            <li><a href="./howItWork">How It Works</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="footer_para">&copy; 2024 ECHOPIXELS. All rights reserved.</p>
+        </footer>
+    </main>
+</body>
+</html>

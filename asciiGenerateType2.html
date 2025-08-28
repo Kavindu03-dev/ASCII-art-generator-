@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <title>ASCII Art Generator</title>
+    <link rel="stylesheet" type="text/css" href="Styles/asciiGenerateStyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+</head>
+<body>
+    <header>
+        <h1>ASCII Art Generator</h1>
+        <nav>
+            <a href="./">Home</a>
+            <a href="./about">About</a>
+            <a href="./howItWork">How It Works</a>
+            <a href="./gallery">Gallery</a>
+            <a href="./contact">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section id="ascii-generator" class="ascii-generator">
+            <h2>Upload Image to Generate ASCII Art</h2>
+            <input type="file" id="imageUploader" accept="image/*">
+            <div id="ascii-container"></div>
+        </section>
+    </main>
+    <script>
+        const density = 'N@#W$9876543210?!abc;:+=-,._ ';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploader = document.getElementById('imageUploader');
+            uploader.addEventListener('change', handleImageUpload);
+        });
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = function () {
+                        processImage(img);
+                    }
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function processImage(img) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = 100;
+            const height = Math.floor((img.height / img.width) * width);
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const imageData = ctx.getImageData(0, 0, width, height);
+            const pixels = imageData.data;
+            let asciiImage = '';
+
+            for (let j = 0; j < height; j++) {
+                for (let i = 0; i < width; i++) {
+                    const pixelIndex = (i + j * width) * 4;
+                    const r = pixels[pixelIndex];
+                    const g = pixels[pixelIndex + 1];
+                    const b = pixels[pixelIndex + 2];
+                    const avg = (r + g + b) / 3;
+                    const len = density.length;
+                    const charIndex = Math.floor(map(avg, 0, 255, 0, len-1));
+                    const c = density.charAt(charIndex);
+                    asciiImage += (c === ' ') ? '&nbsp;' : c;
+                }
+                asciiImage += '<br>';
+            }
+            document.getElementById('ascii-container').innerHTML = asciiImage;
+        }
+
+        function map(value, start1, stop1, start2, stop2) {
+            return ((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+        }
+    </script>
+</body>
+</html>
